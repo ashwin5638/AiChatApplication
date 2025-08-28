@@ -1,0 +1,234 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Body */
+body {
+  background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Container */
+.chat-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto; /* center on all screens */
+  width: 100%;
+  padding: 0 1rem; /* spacing for small screens */
+}
+
+.head {
+  font-size: 45px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.chat {
+  width: 130vh;
+  max-width: 1200px;
+  background: #24243e;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Button */
+.buttn {
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  height: 60px;
+  width: 100%;
+  max-width: 250px;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  margin: 1rem auto;
+  transition: all 0.3s ease;
+}
+
+.buttn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(239, 233, 237, 0.7);
+}
+
+/* Textarea */
+.text-area {
+  width: 100%;
+  max-width: 110vh;
+  margin-left: 40px;
+  height: 90px;
+  border-radius: 15px;
+  border: 1px solid #444;
+  background: #1c1c2b;
+  color: #fff;
+  padding: 1rem;
+  padding-left: 30px;
+  font-size: 23px;
+  margin-bottom: 1.5rem;
+  outline: none;
+  margin-top: 20px;
+  resize: none;
+  transition: border 0.3s;
+}
+
+.text-area:focus {
+  border: 1px solid #7873f5;
+  box-shadow: 0 0 10px rgba(120, 115, 245, 0.5);
+}
+
+.answer-box {
+  animation: fadeIn 0.4s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Scrollbar styling */
+.text-area::-webkit-scrollbar {
+  width: 8px;
+}
+.text-area::-webkit-scrollbar-track {
+  background: #1c1c2b;
+  border-radius: 10px;
+}
+.text-area::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+.text-area::-webkit-scrollbar-thumb:hover {
+  background: #7873f5;
+}
+.text-area {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #1c1c2b;
+}
+
+/* Answer display */
+.answer-box {
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: "Fira Code", monospace;
+  line-height: 1.6;
+  overflow-x: auto;
+   padding-left: 40px;
+  font-size: 22px;
+}
+
+.answer-box pre {
+  background: #0e0e16;
+  padding: 0.8rem;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.answer{
+  padding-left: 30px;
+  font-size: 25px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 Mobile Optimizations */
+@media (max-width: 768px) {
+  .chat {
+    padding: 1rem;
+  }
+
+  .head {
+    font-size: 1.5rem;
+  }
+
+  .text-area {
+    font-size: 0.9rem;
+    height: 100px;
+    padding: 0.8rem;
+  }
+
+  .buttn {
+    width: 100%;
+    max-width: none;
+    font-size: 0.9rem;
+  }
+
+  .answer-box {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Mobile responsive for <= 480px */
+@media (max-width: 480px) {
+  body {
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .chat-div {
+    margin: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .chat {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .head {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .text-area {
+    width: 100%;
+    max-width: 100%;
+    height: 120px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .buttn {
+    width: 100%;
+    font-size: 18px;
+    margin: 1rem 0;
+  }
+
+  .chat p,
+  .answer-box {
+    font-size: 14px;
+    padding: 0.8rem;
+  }
+}
