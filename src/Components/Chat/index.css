@@ -10,18 +10,15 @@
 body {
   background: linear-gradient(135deg, #1e1e2f, #2b2b45);
   color: #fff;
-  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  margin: auto;
 }
 
 /* Container */
 .chat-div {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin: 50px auto; /* center on all screens */
   width: 100%;
   padding: 0 1rem; /* spacing for small screens */
@@ -32,6 +29,8 @@ body {
   margin-bottom: 1.5rem;
   background: linear-gradient(45deg, #ff6ec4, #7873f5);
   -webkit-background-clip: text;
+  margin-top: 100px;
+  margin-left: 250px;
   -webkit-text-fill-color: transparent;
   text-align: center;
 }
@@ -44,6 +43,7 @@ body {
   padding: 2rem;
   margin-top: 30px;
   display: flex;
+  margin-left: 300px;
   flex-direction: column;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   text-align: center;
@@ -65,6 +65,14 @@ body {
   color: white;
   margin: 1rem auto;
   transition: all 0.3s ease;
+}
+
+.para{
+  color: gainsboro ;
+  margin-left: 850px;
+  margin-top:450px ;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .buttn:hover {
@@ -161,6 +169,7 @@ body {
 
 /* 📱 Mobile Optimizations */
 @media (max-width: 768px) {
+
   .chat {
     padding: 1rem;
   }
@@ -187,48 +196,66 @@ body {
 }
 
 
+
 /* Mobile responsive for <= 480px */
 @media (max-width: 480px) {
-  body {
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
-
   .chat-div {
-    margin: 0;
-    margin-top: 20px;
+    margin: 0 auto;
+    margin-top: 15px;
     width: 100%;
+    padding: 0 10px; /* keep spacing at edges */
   }
 
   .chat {
-    width: 100%;
+    width: 480px;
     max-width: 100%;
     padding: 1rem;
+    margin: 0 auto;
+    border-radius: 12px;
   }
 
+
+  .para{
+  color: gainsboro ;
+  margin-left: 180px;
+  margin-top: 500px ;
+  font-size: 23px;
+  font-weight: 500;
+}
   .head {
-    font-size: 1.5rem;
+    font-size: 40px;
+    margin: 20px auto;
     text-align: center;
+    margin-left: 120px;
   }
 
   .text-area {
     width: 100%;
-    max-width: 100%;
-    height: 120px;
+    height: 110px;
     font-size: 16px;
-    margin-top: 20px;
+    margin: 15px 0;
+    padding: 0.8rem;
+    padding-left: 15px;
   }
 
   .buttn {
     width: 100%;
+    max-width: 260px;
     font-size: 18px;
-    margin: 1rem 0;
+    height: 50px;
+    margin-left: 100px;
   }
 
-  .chat p,
   .answer-box {
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.4;
     padding: 0.8rem;
+    margin-top: 1rem;
+    padding-left: 15px;
+  }
+
+  .answer {
+    font-size: 18px;
+    padding-left: 15px;
   }
 }
