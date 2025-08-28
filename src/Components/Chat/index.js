@@ -50,6 +50,7 @@ const ChatAi = () => {
 )}
 
       </div>
+      <p className="para">@ashwin5638</p>
     </div>
   );
 };
