@@ -10,12 +10,16 @@ const ChatAi = () => {
   const [copied, setCopied] = useState(false);
   const [fileData, setFileData] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [history, setHistory] = useState([]);
+
 
 
 const generateAnswer = async () => {
   setAnswer("loading...");
 
   const parts = [{ text: questions }];
+
+  
 
   if (fileData) {
     parts.push({
@@ -33,18 +37,37 @@ const generateAnswer = async () => {
     }
   );
 
-  setAnswer(response.data.candidates[0].content.parts[0].text);
+   setAnswer(response.data.candidates[0].content.parts[0].text);
+
+
+  setHistory(prev => [
+    ...prev,
+    { question: questions,}
+  ]);
+
+  setQuestions(""); 
 };
 
 
   const handleCopy = () => {
     navigator.clipboard.writeText(answer);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // reset
+    setTimeout(() => setCopied(false), 2000)
   };
 
   return (
     <div className="chat-div">
+    
+    <div className="chat-history">
+      <h1 className="history-head">History</h1>
+  {history.map((item, index) => (
+    <div key={index} className="chat-item">
+      <p className="question"><strong>You:</strong> {item.question}</p>
+     
+    </div>
+  ))}
+</div>
+     <div className="chat-container">
       <h1 className="head">Chat with AI</h1>
       <div className="chat">
         <div className="text-container">
@@ -107,10 +130,11 @@ const generateAnswer = async () => {
 )}
 
 </div>
-
-        <button className="buttn" onClick={generateAnswer}>
+ <button className="buttn" onClick={generateAnswer}>
           Generate Answer
         </button>
+  </div>
+       
         {answer && (
           <div className="answer-box">
           
@@ -123,8 +147,9 @@ const generateAnswer = async () => {
             </div>
           </div>
         )}
-      </div>
+    
       <p className="para">@ashwin5638</p>
+      </div>
     </div>
   );
 };

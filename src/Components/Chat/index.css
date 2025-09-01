@@ -17,33 +17,81 @@ body {
 /* Container */
 .chat-div {
   display: flex;
+  flex-direction: row;
   min-height: 100vh;
-  flex-direction: column;
-  margin: 50px auto; /* center on all screens */
   width: 100%;
-  padding: 0 1rem; /* spacing for small screens */
+  padding: 0;
+  margin: 0;
+}
+
+.chat-history {
+  width: 280px;           /* fixed width between 250–300px */
+  background: #1a1a2e;
+  padding: 1rem;
+  overflow-y: auto;
+  border-right: 1px solid #333;
+  position: fixed;       
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.chat-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-item {
+  background: #2d2d3a;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chat-item:hover {
+  background: #3a3a50;
+}
+
+
+.question {
+  color: #a7a9ab;
+  font-size: 15px;
+}
+
+.answer {
+  color: #fff;
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+
+.history-head{
+  color: #7873f5;
+  margin-bottom: 20px;
 }
 
 .head {
-  font-size: 45px;
+  font-size: 33px;
   margin-bottom: 1.5rem;
   background: linear-gradient(45deg, #ff6ec4, #7873f5);
   -webkit-background-clip: text;
-  margin-top: 60px;
-  margin-left: 280px;
   -webkit-text-fill-color: transparent;
   text-align: center;
+  margin-left: 300px;
+  margin-top: 20px;
 }
 
 .chat {
+  flex: 1;
+  margin-left: 380px;    
   width: 130vh;
-  max-width: 1300px;
   background: #24243e;
   border-radius: 20px;
   padding: 2rem;
+  margin-bottom: 30px;
   margin-top: 30px;
   display: flex;
-  margin-left: 250px;
   flex-direction: column;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   text-align: center;
@@ -57,11 +105,11 @@ body {
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
   cursor: pointer;
-  height: 60px;
+  height: 45px;
   width: 100%;
-  max-width: 250px;
-  font-size: 22px;
-  font-weight: 700;
+  max-width: 200px;
+  font-size: 18px;
+  font-weight: 650;
   color: white;
   margin: 1rem auto;
   transition: all 0.3s ease;
@@ -69,8 +117,8 @@ body {
 
 .para{
   color: gainsboro ;
-  margin-left: 650px;
-  margin-top:450px ;
+  margin-left: 830px;
+  margin-top: 300px ;
   font-size: 20px;
   font-weight: 500;
 }
@@ -84,8 +132,8 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 50px;
-  max-width: 110vh;
+  margin: 10px;
+  max-width: 150vh;
   border-radius: 15px;
   border: 1px solid #444;
   background: #1c1c2b;
@@ -106,9 +154,9 @@ body {
 
 .text-area{
   width: 100%;
-  max-width: 110vh;
+  max-width: 80vh;
   padding-top: 5px;
-  height: 30px;
+  height: 40px;
   background: transparent;
   color: #fff;
   padding-left: 25px;
@@ -158,8 +206,10 @@ body {
   background: transparent;
   margin-bottom: 100px;
   padding: 16px;
+  margin-left: 380px;    
+  width: 135vh;
   border-radius: 8px;
-  margin-top: 20px;
+  margin-top: 100px;
   font-family: monospace;
 }
 
