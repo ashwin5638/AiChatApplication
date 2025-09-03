@@ -1,4 +1,6 @@
-/* Reset */
+/* -------------------- */
+/* 1. Global Reset + Base */
+/* -------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -6,15 +8,12 @@
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Body */
 body {
   background: linear-gradient(135deg, #1e1e2f, #2b2b45);
   color: #fff;
   display: flex;
-
 }
 
-/* Container */
 .chat-div {
   display: flex;
   flex-direction: row;
@@ -24,21 +23,63 @@ body {
   margin: 0;
 }
 
+.head-mobile {
+  display: none;
+}
+
+/* -------------------- */
+/* 2. Desktop / Default */
+/* -------------------- */
 .chat-history {
-  width: 280px;           /* fixed width between 250–300px */
+  width: 280px;
   background: #1a1a2e;
   padding: 1rem;
   overflow-y: auto;
   border-right: 1px solid #333;
-  position: fixed;       
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
+  transition: transform 0.3s ease-in-out;
 }
 
-.chat-container{
+.chat-history.hidden {
+  transform: translateX(-100%);
+}
+.chat-history.active {
+  transform: translateX(0);
+  z-index: 1500;
+}
+
+.history-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 2000;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+}
+
+.chat-container {
   display: flex;
   flex-direction: column;
+}
+
+.head-mobile {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 60px;
+  color: #fff;
+}
+
+.history-head{
+  color: #7873f5;
 }
 
 .chat-item {
@@ -46,6 +87,7 @@ body {
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 10px;
+  margin-top: 20px;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -53,23 +95,11 @@ body {
   background: #3a3a50;
 }
 
-
 .question {
   color: #a7a9ab;
   font-size: 15px;
 }
 
-.answer {
-  color: #fff;
-  font-size: 15px;
-  margin-top: 4px;
-}
-
-
-.history-head{
-  color: #7873f5;
-  margin-bottom: 20px;
-}
 
 .head {
   font-size: 33px;
@@ -84,7 +114,7 @@ body {
 
 .chat {
   flex: 1;
-  margin-left: 380px;    
+  margin-left: 380px;
   width: 130vh;
   background: #24243e;
   border-radius: 20px;
@@ -98,7 +128,6 @@ body {
   animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Button */
 .buttn {
   background: linear-gradient(45deg, #ff6ec4, #7873f5);
   border: none;
@@ -114,21 +143,20 @@ body {
   margin: 1rem auto;
   transition: all 0.3s ease;
 }
-
-.para{
-  color: gainsboro ;
-  margin-left: 830px;
-  margin-top: 300px ;
-  font-size: 20px;
-  font-weight: 500;
-}
-
 .buttn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(239, 233, 237, 0.7);
 }
 
-.text-container{
+.para {
+  color: gainsboro;
+  margin-left: 830px;
+  margin-top: 300px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.text-container {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -142,17 +170,15 @@ body {
   margin-top: 20px;
   resize: none;
   transition: border 0.3s;
-   min-height: 60px; 
+  min-height: 60px;
   transition: height 0.2s ease;
 }
-
-
 .text-container:focus {
   border: 1px solid #7873f5;
   box-shadow: 0 0 10px rgba(120, 115, 245, 0.5);
 }
 
-.text-area{
+.text-area {
   width: 100%;
   max-width: 80vh;
   padding-top: 5px;
@@ -179,7 +205,6 @@ body {
   color: #fff;
   gap: 6px;
 }
-
 .remove-file {
   border: none;
   background: transparent;
@@ -187,8 +212,6 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
-
-
 
 .chat-plus {
   border: none;
@@ -198,19 +221,6 @@ body {
   font-weight: 200;
   padding-left: 8px;
   cursor: pointer;
-}
-
-
-.answer-box {
-  position: relative;
-  background: transparent;
-  margin-bottom: 100px;
-  padding: 16px;
-  margin-left: 380px;    
-  width: 135vh;
-  border-radius: 8px;
-  margin-top: 100px;
-  font-family: monospace;
 }
 
 .copy-btn {
@@ -227,48 +237,27 @@ body {
   cursor: pointer;
   transition: 0.2s;
 }
-
 .copy-btn:hover {
   background: #444;
 }
 
-.answer-container{
+.answer-container {
   margin-top: 40px;
 }
-
-
 
 .answer-box {
   animation: fadeIn 0.4s ease-in-out;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* Scrollbar styling */
-.text-area::-webkit-scrollbar {
-  width: 8px;
-}
-.text-area::-webkit-scrollbar-track {
-  background: #1c1c2b;
-  border-radius: 10px;
-}
-.text-area::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 10px;
-}
-.text-area::-webkit-scrollbar-thumb:hover {
-  background: #7873f5;
-}
-.text-area {
-  scrollbar-width: thin;
-  scrollbar-color: #444 #1c1c2b;
-}
-
-/* Answer display */
 .answer-box {
+  position: relative;
+  background: transparent;
+  margin-bottom: 100px;
+  padding: 16px;
+  margin-left: 380px;
+  width: 135vh;
+  border-radius: 8px;
+  margin-top: 100px;
+  font-family: monospace;
   background: #1a1a2e;
   padding: 1rem;
   border-radius: 12px;
@@ -278,157 +267,145 @@ body {
   font-family: "Fira Code", monospace;
   line-height: 1.6;
   overflow-x: auto;
-   padding-left: 40px;
+  padding-left: 40px;
   font-size: 22px;
 }
-
 .answer-box pre {
   background: #0e0e16;
   padding: 0.8rem;
   border-radius: 10px;
   overflow-x: auto;
 }
-
-.answer{
+.answer {
   padding-left: 30px;
   font-size: 25px;
 }
 
-/* Animations */
+/* -------------------- */
+/* 3. Animations + Scrollbars */
+/* -------------------- */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 📱 Mobile Optimizations */
+.text-area::-webkit-scrollbar { width: 8px; }
+.text-area::-webkit-scrollbar-track { background: #1c1c2b; border-radius: 10px; }
+.text-area::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+.text-area::-webkit-scrollbar-thumb:hover { background: #7873f5; }
+.text-area { scrollbar-width: thin; scrollbar-color: #444 #1c1c2b; }
+
+/* -------------------- */
+/* 4. Tablet (≤768px) */
+/* -------------------- */
 @media (max-width: 768px) {
-
-  .chat {
-    padding: 1rem;
-  }
-
-  .head {
-    font-size: 1.5rem;
-  }
-
-  .text-area {
-    font-size: 0.9rem;
-    height: 100px;
-    padding: 0.8rem;
-  }
-
-  .buttn {
-    width: 100%;
-    max-width: none;
-    font-size: 0.9rem;
-  }
-
-  .answer-box {
-    font-size: 0.9rem;
-  }
+  .chat { padding: 1rem; }
+  .head { font-size: 1.5rem; }
+  .text-area { font-size: 0.9rem; height: 100px; padding: 0.8rem; }
+  .buttn { width: 100%; max-width: none; font-size: 0.9rem; }
+  .answer-box { font-size: 0.9rem; }
 }
 
-
-
+/* -------------------- */
+/* 5. Mobile (≤480px) */
+/* -------------------- */
 @media (max-width: 480px) {
   .chat-div {
     margin-top: 15px;
-    width: 100%;
     margin: 0px;
+    height: 100vh;
+    width: 480px;
   }
+  .history-toggle { display: block; }
+  .chat-history { transform: translateX(-100%); }
 
   .chat {
-    width: 480px;
-    max-width: 100%;
+    width: 450px;
     margin: 0px;
     border-radius: 12px;
+    margin-left: 20px;
   }
 
+  .para {
+    color: gainsboro;
+    margin-left: 180px;
+    margin-top: 400px;
+    font-size: 23px;
+    font-weight: 500;
+  }
 
-  .para{
-  color: gainsboro ;
-  margin-left: 180px;
-  margin-top: 580px ;
-  font-size: 23px;
-  font-weight: 500;
-}
-.head {
-    font-size: 40px;
+  .head {
+    font-size: 30px;
     margin-top: 20px;
     text-align: center;
     margin-left: 50px;
   }
 
- .text-container{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 460px;
-  border-radius: 15px;
-  border: 1px solid #444;
-  background: #1c1c2b;
-  margin: 0px;
-  padding: 10px;
-  margin-bottom: 1.5rem;
-  margin-top: 20px;
-  resize: none;
-  transition: border 0.3s;
-   min-height: 60px; 
-  transition: height 0.2s ease;
-}
+  .text-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 5px;
+    max-width: 140vh;
+    border-radius: 15px;
+    border: 1px solid #444;
+    background: #1c1c2b;
+    padding: 10px;
+    margin-bottom: 1.5rem;
+    margin-top: 20px;
+    resize: none;
+    transition: border 0.3s;
+    min-height: 40px;
+    transition: height 0.2s ease;
+  }
+  .text-container:focus {
+    border: 1px solid #7873f5;
+    box-shadow: 0 0 10px rgba(120, 115, 245, 0.5);
+  }
 
+  .text-area {
+    width: 100%;
+    max-width: 450px;
+    padding-top: 5px;
+    height: 30px;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    margin: 0px;
+    outline: none;
+    border: 0px;
+    resize: none;
+    transition: border 0.3s;
+  }
 
-.text-container:focus {
-  border: 1px solid #7873f5;
-  box-shadow: 0 0 10px rgba(120, 115, 245, 0.5);
-}
+  .file-chip {
+    margin-top: 8px;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    background: #2d2d3a;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #fff;
+    gap: 6px;
+  }
 
-.text-area{
-  width: 100%;
-  max-width: 450px;
-  padding-top: 5px;
-  height: 30px;
-  background: transparent;
-  color: #fff;
-  font-size: 18px;
-  margin: 0px;
-  outline: none;
-  border: 0px;
-  resize: none;
-  transition: border 0.3s;
-}
+  .remove-file {
+    border: none;
+    background: transparent;
+    color: #ff6b6b;
+    font-size: 14px;
+    cursor: pointer;
+  }
 
-.file-chip {
-  margin-top: 8px;
-  padding: 6px 10px;
-  display: inline-flex;
-  align-items: center;
-  background: #2d2d3a;
-  border-radius: 12px;
-  font-size: 14px;
-  color: #fff;
-  gap: 6px;
-}
-
-.remove-file {
-  border: none;
-  background: transparent;
-  color: #ff6b6b;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-
-
-.chat-plus {
-  border: none;
-  background: transparent;
-  color: #fff;
-  font-size: 28px;
-  font-weight: 200;
-  cursor: pointer;
-}
-
+  .chat-plus {
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 200;
+    cursor: pointer;
+  }
 
   .buttn {
     width: 100%;
@@ -437,18 +414,42 @@ body {
     height: 50px;
     margin-left: 100px;
   }
+  .history-head{
+     color: #7873f5;
+    margin-top: 50px;
+  }
 
-  .answer-box {
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  margin-bottom: 80px;
+  border: 1px solid #e0dbdb;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: #b1adad;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.copy-btn:hover {
+  background: #444;
+}
+ .answer-box {
     font-size: 15px;
     line-height: 1.4;
-    padding: 0.8rem;
-    margin-top: 1rem;
-    padding-left: 15px;
+    padding: 10px;
+    width: 100%;
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 30px;
+    overflow: visible;
   }
 
   .answer {
-    font-size: 18px;
-    padding-left: 15px;
+    font-size: 26px;
   }
-}
 
+}

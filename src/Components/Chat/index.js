@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./index.css";
 
 const ChatAi = () => {
@@ -11,6 +12,7 @@ const ChatAi = () => {
   const [fileData, setFileData] = useState(null);
   const [fileName, setFileName] = useState("");
   const [history, setHistory] = useState([]);
+    const [showHistory, setShowHistory] = useState(false);
 
 
 
@@ -57,12 +59,27 @@ const generateAnswer = async () => {
 
   return (
     <div className="chat-div">
-    
+      <button
+        className="history-toggle"
+        onClick={() => setShowHistory(!showHistory)}
+      >
+        <GiHamburgerMenu />
+      </button>
+        <div className={`chat-history ${showHistory ? "active" : "hidden"}`}>
+        <h2 className="history-head">History</h2>
+          {history.map((item, index) => (
+    <div key={index} className="chat-item">
+      <p className="question"><strong></strong> {item.question}</p>
+     
+    </div>
+  ))}
+      </div>
+
     <div className="chat-history">
       <h1 className="history-head">History</h1>
   {history.map((item, index) => (
     <div key={index} className="chat-item">
-      <p className="question"><strong>You:</strong> {item.question}</p>
+      <p className="question"><strong></strong> {item.question}</p>
      
     </div>
   ))}
