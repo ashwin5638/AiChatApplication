@@ -1,58 +1,42 @@
 import { useState } from 'react'
 
 const STORAGE_KEY = 'luminash-history'
-
-const loadHistory = () => {
-    try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
-    } catch {
-        return []
-    }
-}
+const newId = () => Date.now().toString()
 
 const Chat = () => {
-    const [conversations, setConversations] = useState(loadHistory)
+    const [conversations, setConversations] = useState(() => {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+        } catch {
+            return []
+        }
+    })
     const [activeId, setActiveId] = useState(null)
     const [input, setInput] = useState('')
     const [loading, setLoading] = useState(false)
 
     const active = conversations.find(c => c.id === activeId) || null
 
-    const saveConvos = (convo, newConvos) => {
-        let updated
-        if (newConvos) {
-            updated = newConvos
-        } else if (convo) {
-            updated = conversations.some(c => c.id === convo.id)
-                ? conversations.map(c => c.id === convo.id ? convo : c)
-                : [...conversations, convo]
-        } else {
-            updated = conversations
-        }
-        setConversations(updated)
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
-    }
-
     const startNewChat = () => {
         setActiveId(null)
         setInput('')
+    }
+
+    const deleteConversation = (id) => {
+        const next = conversations.filter(c => c.id !== id)
+        setConversations(next)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+        if (activeId === id) setActiveId(null)
     }
 
     const sendMessage = async () => {
         const text = input.trim()
         if (!text || loading) return
 
-        let convo = conversations.find(c => c.id === activeId)
-        if (!convo) {
-            convo = { id: Date.now().toString(), title: text.slice(0, 40), messages: [] }
-            setActiveId(convo.id)
-        }
-
-        convo.messages = [...convo.messages, { role: 'user', content: text }]
-        setInput('')
         setLoading(true)
-        saveConvos(convo)
+        setInput('')
 
+        let reply
         try {
             const res = await fetch('/api/chat', {
                 method: 'POST',
@@ -60,12 +44,28 @@ const Chat = () => {
                 body: JSON.stringify({ message: text })
             })
             const data = await res.json()
-            convo.messages = [...convo.messages, { role: 'ai', content: data.reply }]
+            reply = data.reply
         } catch {
-            convo.messages = [...convo.messages, { role: 'ai', content: 'Error: could not reach server' }]
+            reply = 'Error: could not reach server'
         }
 
-        saveConvos(convo)
+        const convo = active
+            ? {
+                ...active,
+                messages: [...active.messages, { role: 'user', content: text }, { role: 'ai', content: reply }]
+            }
+            : {
+                id: newId(),
+                title: text.slice(0, 40),
+                messages: [{ role: 'user', content: text }, { role: 'ai', content: reply }]
+            }
+
+        const next = conversations.some(c => c.id === convo.id)
+            ? conversations.map(c => c.id === convo.id ? convo : c)
+            : [...conversations, convo]
+
+        setConversations(next)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
         setLoading(false)
     }
 
@@ -77,14 +77,22 @@ const Chat = () => {
                 <div className="history">
                     {conversations.length === 0 && <p className="empty-history">No chats yet</p>}
                     {conversations.map(c => (
-                        <button
-                            key={c.id}
-                            className={`history-item ${c.id === activeId ? 'active' : ''}`}
-                            onClick={() => setActiveId(c.id)}
-                            title={c.title}
-                        >
-                            {c.title}
-                        </button>
+                        <div key={c.id} className={`history-item ${c.id === activeId ? 'active' : ''}`}>
+                            <button
+                                className="history-title"
+                                onClick={() => setActiveId(c.id)}
+                                title={c.title}
+                            >
+                                {c.title}
+                            </button>
+                            <button
+                                className="history-delete"
+                                onClick={() => deleteConversation(c.id)}
+                                aria-label="Delete"
+                            >
+                                ×
+                            </button>
+                        </div>
                     ))}
                 </div>
             </aside>
@@ -112,7 +120,7 @@ const Chat = () => {
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={e => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
+                            if (e.key === 'Enter') {
                                 e.preventDefault()
                                 sendMessage()
                             }
@@ -123,7 +131,7 @@ const Chat = () => {
                     <button
                         className="send-btn"
                         onClick={sendMessage}
-                        disabled={loading || !input.trim()}
+                        disabled={loading}
                     >
                         Send
                     </button>

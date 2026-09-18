@@ -61,17 +61,9 @@ body {
 }
 
 .history-item {
-    background: transparent;
-    border: none;
-    color: #c9cbcf;
-    text-align: left;
-    padding: 9px 10px;
+    display: flex;
+    align-items: center;
     border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     width: 100%;
 }
 
@@ -81,7 +73,43 @@ body {
 
 .history-item.active {
     background: #3a3d46;
+}
+
+.history-title {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color : white;
+    text-align: left;
+    padding: 9px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.history-item.active .history-title {
     color: #fff;
+}
+
+.history-delete {
+    background: transparent;
+    border: none;
+    color: #8b8e94;
+    font-size: 16px;
+    padding: 4px 8px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.history-item:hover .history-delete {
+    opacity: 1;
+}
+
+.history-delete:hover {
+    color: #ff5a5a;
 }
 
 .main {
