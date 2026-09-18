@@ -6,7 +6,7 @@ const newId = () => Date.now().toString()
 const Chat = () => {
     const [conversations, setConversations] = useState(() => {
         try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) 
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [] 
         } catch {
             return []
         }
