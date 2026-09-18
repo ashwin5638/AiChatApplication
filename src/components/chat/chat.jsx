@@ -6,7 +6,7 @@ const newId = () => Date.now().toString()
 const Chat = () => {
     const [conversations, setConversations] = useState(() => {
         try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) 
         } catch {
             return []
         }
@@ -15,7 +15,7 @@ const Chat = () => {
     const [input, setInput] = useState('')
     const [loading, setLoading] = useState(false)
 
-    const active = conversations.find(c => c.id === activeId) || null
+    const active = conversations.find(c => c.id === activeId) 
 
     const startNewChat = () => {
         setActiveId(null)

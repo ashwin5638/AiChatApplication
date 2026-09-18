@@ -6,7 +6,7 @@ import { GoogleGenAI } from "@google/genai"
 const app = express()
 app.use(express.json())
 
-app.use(cors())
+app.use(cors({ origin: 'http://localhost:5173' }))
 
 
 const ai = new GoogleGenAI({apiKey : process.env.API_Key})
