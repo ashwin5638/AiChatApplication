@@ -133,7 +133,7 @@ const Chat = () => {
                         onClick={sendMessage}
                         disabled={loading}
                     >
-                        Send
+                        {loading ? <span className="spinner" aria-label="Loading"></span> : 'Send'}
                     </button>
                 </div>
             </main>
