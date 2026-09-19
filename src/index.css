@@ -25,6 +25,21 @@ body {
     gap: 12px;
 }
 
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-close {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+}
+
 .logo {
     font-size: 18px;
     font-weight: 600;
@@ -334,4 +349,117 @@ body {
 .send-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.topbar {
+    display: none;
+}
+
+.backdrop {
+    display: none;
+}
+
+.menu-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .app {
+        height: 100vh;
+        height: 100dvh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        z-index: 40;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e7e8ea;
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .sidebar-close:hover {
+        background: #32343b;
+    }
+
+    .history-delete {
+        opacity: 1;
+    }
+
+    .topbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #e2e4e8;
+    }
+
+    .menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: #1a1a1a;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 8px;
+    }
+
+    .menu-btn:active {
+        background: #e8eaed;
+    }
+
+    .topbar-title {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 30;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+
+    .backdrop.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .main {
+        padding: 12px;
+    }
+
+    .bubble {
+        max-width: 88%;
+    }
+
+    .welcome h2 {
+        font-size: 22px;
+    }
 }
