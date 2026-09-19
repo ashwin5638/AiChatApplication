@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 const STORAGE_KEY = 'luminash-history'
 const newId = () => Date.now().toString()
@@ -66,6 +67,7 @@ const Chat = () => {
 
         setConversations(next)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+        setActiveId(convo.id)
         setLoading(false)
     }
 
@@ -107,7 +109,11 @@ const Chat = () => {
                     <div className="messages">
                         {active.messages.map((m, i) => (
                             <div key={i} className={`message ${m.role}`}>
-                                <div className="bubble">{m.content}</div>
+                                <div className="bubble">
+                                    {m.role === 'ai'
+                                        ? <ReactMarkdown>{m.content}</ReactMarkdown>
+                                        : m.content}
+                                </div>
                             </div>
                         ))}
                         {loading && <div className="message ai"><div className="bubble typing">Thinking...</div></div>}
